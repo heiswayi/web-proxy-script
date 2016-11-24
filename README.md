@@ -1,6 +1,6 @@
 # private-web-proxy
 
-My minimalist web proxy script used at http://proxy.wayi.me
+My minimalist web proxy PHP script used at ~~http://proxy.wayi.me~~
 
 ## Screenshot
 
