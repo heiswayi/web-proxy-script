@@ -4,7 +4,7 @@ My minimalist web proxy PHP script used at http://proxy.nrird.xyz
 
 ## Screenshot
 
-![Screenshot](screenshot.png)
+![Screenshot](screenshot2.png)
 
 ## License
 
