@@ -1,6 +1,6 @@
 <?php
 
-// Private Web Proxy by Heiswayi Nrird (http://heiswayi.github.io)
+// Private web proxy script by Heiswayi Nrird (http://heiswayi.github.io)
 // Released under MIT license
 // Free Software should work like this: whatever you take for free, you must give back for free.
 
@@ -32,7 +32,7 @@ function makeRequest($url) {
   //Tell cURL to make the request using the brower's user-agent if there is one, or a fallback user-agent otherwise.
   $user_agent = $_SERVER["HTTP_USER_AGENT"];
   if (empty($user_agent)) {
-    $user_agent = "Mozilla/5.0 (compatible; PrivateWebProxy)";
+    $user_agent = "Mozilla/5.0 (compatible; proxy.nrird.xyz)";
   }
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_USERAGENT, $user_agent);
@@ -152,18 +152,221 @@ function proxifyCSS($css, $baseURL) {
     $css);
 }
 
-// // Create log
-// function recordLog($url) {
-//   $userip = $_SERVER['REMOTE_ADDR'];
-//   $rdate = date("d-m-Y", time());
-//   $data = $rdate.','.$userip.','.$url.PHP_EOL;
-//   $logfile = 'logs/'.$userip.'_log.txt';
-//   $fp = fopen($logfile, 'a');
-//   fwrite($fp, $data);
-// }
+// Create log
+function recordLog($url) {
+  $userip = $_SERVER['REMOTE_ADDR'];
+  $rdate = date("d-m-Y", time());
+  $data = $rdate.','.$userip.','.$url.PHP_EOL;
+  $logfile = 'logs/'.$userip.'_log.txt';
+  $fp = fopen($logfile, 'a');
+  fwrite($fp, $data);
+}
+
+$proxy_prefix = PROXY_PREFIX;
+$htmlcode = <<<ENDHTML
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>PROXY &middot; NRIRD &middot; XYZ</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0
+        }
+
+        body {
+            background: #f3f3f3;
+            font: 400 16px sans-serif;
+            color: #555
+        }
+
+        nav {
+            max-width: 800px;
+            margin: 80px auto 60px;
+            text-align: center;
+            font-size: 18px;
+            color: silver
+        }
+
+        nav a {
+            display: inline-block;
+            margin: 0 14px;
+            text-decoration: none;
+            color: #6e6e6e;
+            font-weight: 700;
+            font-size: 16px
+        }
+
+        nav a.active {
+            color: #6CAEE0
+        }
+
+        form {
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 500px;
+			min-width: 350px;
+            margin: 50px auto;
+            padding: 55px;
+            background-color: #fff;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1);
+            font: 400 14px sans-serif;
+            text-align: center
+        }
+
+        form .form-row {
+            text-align: left;
+        }
+
+        form .form-title-row {
+            margin: 0 auto 40px auto;
+			text-align: left;
+        }
+
+        form h1 {
+            display: block;
+            box-sizing: border-box;
+            color: #4C565E;
+            font-size: 24px;
+            padding: 0 0 3px;
+            margin: 0;
+            border-bottom: 2px solid #6CAEE0
+        }
+
+        form .form-row>label span {
+            display: block;
+            box-sizing: border-box;
+            color: #5f5f5f;
+            padding: 0 0 10px;
+            font-weight: 700
+        }
+
+        form input {
+            color: #5f5f5f;
+            box-sizing: border-box;
+            box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, .08);
+            padding: 12px 18px;
+            border: 1px solid #dbdbdb;
+			margin-bottom: 10px;
+        }
+
+        form input[type=email],
+        form input[type=password],
+        form input[type=text],
+        form textarea {
+            width: 100%
+        }
+
+        form input[type=number] {
+            max-width: 100px
+        }
+
+        form input[type=checkbox],
+        form input[type=radio] {
+            box-shadow: none;
+            width: auto
+        }
+
+        form textarea {
+            color: #5f5f5f;
+            box-sizing: border-box;
+            box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, .08);
+            padding: 12px 18px;
+            border: 1px solid #dbdbdb;
+            resize: none;
+            min-height: 80px;
+        }
+
+        form select {
+            background-color: #fff;
+            color: #5f5f5f;
+            box-sizing: border-box;
+            width: 240px;
+            box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, .08);
+            padding: 12px 18px;
+            border: 1px solid #dbdbdb
+        }
+
+        form .form-radio-buttons>div {
+            margin-bottom: 10px
+        }
+
+        form .form-radio-buttons label span {
+            margin-left: 8px;
+            color: #5f5f5f
+        }
+
+        form .form-radio-buttons input {
+            width: auto
+        }
+
+        form button {
+            border-radius: 2px;
+            background-color: #6caee0;
+            color: #fff;
+            font-weight: 700;
+            box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, .08);
+            padding: 14px 22px;
+            border: 0;
+			margin-top: 10px;
+			cursor: pointer;
+        }
+
+        p.explanation {
+            padding: 15px 20px;
+            line-height: 1.5;
+            background-color: #FFFFE0;
+            font-size: 13px;
+            text-align: center;
+            margin-top: 40px;
+            color: #6B6B48;
+            border-radius: 3px;
+            border-bottom: 2px solid #ECECD0;
+			border-right: 2px solid #ECECD0;
+            text-align: left
+        }
+
+        @media (max-width:600px) {
+            form {
+                padding: 30px
+            }
+			body {
+				background: #fff;
+			}
+			form {
+				box-shadow: none;
+			}
+        }
+    </style>
+</head>
+
+<body>
+    <form onsubmit="window.location.href='$proxy_prefix' + document.getElementById('site').value; return false;">
+        <div class="form-title-row">
+            <h1>PROXY &middot; NRIRD &middot; XYZ</h1>
+        </div>
+        <div class="form-row">
+            <label>
+		<span>Enter full URL:</span>
+		<input type="text" id="site" placeholder="http://www.google.com" required>
+		</label>
+        </div>
+        <div class="form-row">
+            <button type="submit">Proxify</button>
+        </div>
+        <p class="explanation"><strong>DISCLAIMER:</strong><br/>Use this proxy at your own risk!</p>
+    </form>
+</body>
+
+</html>
+ENDHTML;
 
 $url = substr($_SERVER["REQUEST_URI"], strlen($_SERVER["SCRIPT_NAME"]) + 1);
-if (empty($url)) die("<!DOCTYPE html><html><head><meta charset=\"utf-8\"><meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\"><meta name=\"viewport\" content=\"width=device-width, initial-scale=1\"><title>Wayi's Private Web Proxy</title><style>*{padding:0;margin:0}html{background-color:#f3f3f3;font:400 16px sans-serif;color:#555}nav{max-width:800px;margin:80px auto 60px;text-align:center;font-size:18px;color:silver}nav a{display:inline-block;margin:0 14px;text-decoration:none;color:#6e6e6e;font-weight:700;font-size:16px}nav a.active{color:#6CAEE0}form{box-sizing:border-box;width:100%;max-width:500px;margin:50px auto;padding:55px;background-color:#fff;box-shadow:0 1px 3px 0 rgba(0,0,0,.1);font:400 14px sans-serif;text-align:center}form .form-row{text-align:left;max-width:315px;margin:25px auto 0}form .form-title-row{margin:0 auto 40px}form h1{display:inline-block;box-sizing:border-box;color:#4C565E;font-size:24px;padding:0 0 12px;margin:0;border-bottom:2px solid #6CAEE0}form .form-row>label span{display:block;box-sizing:border-box;color:#5f5f5f;padding:0 0 12px;font-weight:700}form input{color:#5f5f5f;box-sizing:border-box;box-shadow:1px 2px 4px 0 rgba(0,0,0,.08);padding:12px 18px;border:1px solid #dbdbdb}form input[type=email],form input[type=password],form input[type=text],form textarea{max-width:400px;width:100%}form input[type=number]{max-width:100px}form input[type=checkbox],form input[type=radio]{box-shadow:none;width:auto}form textarea{color:#5f5f5f;box-sizing:border-box;box-shadow:1px 2px 4px 0 rgba(0,0,0,.08);padding:12px 18px;border:1px solid #dbdbdb;resize:none;min-height:80px}form select{background-color:#fff;color:#5f5f5f;box-sizing:border-box;width:240px;box-shadow:1px 2px 4px 0 rgba(0,0,0,.08);padding:12px 18px;border:1px solid #dbdbdb}form .form-radio-buttons>div{margin-bottom:10px}form .form-radio-buttons label span{margin-left:8px;color:#5f5f5f}form .form-radio-buttons input{width:auto}form button{border-radius:2px;background-color:#6caee0;color:#fff;font-weight:700;box-shadow:1px 2px 4px 0 rgba(0,0,0,.08);padding:14px 22px;border:0;margin-top:15px}p.explanation{padding:15px 20px;line-height:1.5;background-color:#FFFFE0;font-size:13px;text-align:center;margin-top:40px;color:#6B6B48;border-radius:3px;border-bottom:2px solid #ECECD0}@media (max-width:600px){form{padding:30px}}</style></head><body><form onsubmit=\"window.location.href='" . PROXY_PREFIX . "' + document.getElementById('site').value; return false;\"><div class=\"form-title-row\"><h1>Wayi's Private Web Proxy</h1></div><div class=\"form-row\"><label><span>Full URL:</span><input type=\"text\" id=\"site\" placeholder=\"http://www.google.com\" required></label></div><div class=\"form-row\"><button type=\"submit\">Proxify</button></div><p class=\"explanation\"><strong>DISCLAIMER</strong><br/>This is my private web proxy. The intention of this service is for my personal use purpose. However, it's publicly accessible and you are free to use it at your own risk if you want!</p></form></body></html>");
+if (empty($url)) die($htmlcode);
 
 if (strpos($url, "//") === 0) $url = "http:" . $url; //Assume that any supplied URLs starting with // are HTTP URLs.
 if (!preg_match("@^.*://@", $url)) $url = "http://" . $url; //Assume that any supplied URLs without a scheme are HTTP URLs.
@@ -323,7 +526,7 @@ if (stripos($contentType, "text/html") !== false) {
 
   }
 
-  echo "<!-- Proxified page constructed by Private Web Proxy @ https://wayi.me/proxy -->\n" . $doc->saveHTML();
+  echo "<!-- Proxified page constructed by http://proxy.nrird.xyz -->\n" . $doc->saveHTML();
 } else if (stripos($contentType, "text/css") !== false) { //This is CSS, so proxify url() references.
   echo proxifyCSS($responseBody, $url);
 } else { //This isn't a web page or CSS, so serve unmodified through the proxy with the correct headers (images, JavaScript, etc.)
