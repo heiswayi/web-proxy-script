@@ -1,6 +1,6 @@
-# private-web-proxy
+# web-proxy-script
 
-My minimalist web proxy PHP script used at http://proxy.nrird.xyz
+Minimalist, private web proxy script used at https://nrird.xyz/proxy
 
 ## Screenshot
 
