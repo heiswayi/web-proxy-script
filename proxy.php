@@ -32,7 +32,7 @@ function makeRequest($url) {
   //Tell cURL to make the request using the brower's user-agent if there is one, or a fallback user-agent otherwise.
   $user_agent = $_SERVER["HTTP_USER_AGENT"];
   if (empty($user_agent)) {
-    $user_agent = "Mozilla/5.0 (compatible; proxy.nrird.xyz)";
+    $user_agent = "Mozilla/5.0 (compatible; nrird.xyz/proxy)";
   }
   $ch = curl_init();
   curl_setopt($ch, CURLOPT_USERAGENT, $user_agent);
@@ -171,7 +171,7 @@ $htmlcode = <<<ENDHTML
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PROXY &middot; NRIRD &middot; XYZ</title>
+    <title>WEB PROXY</title>
     <style>
         * {
             padding: 0;
@@ -347,7 +347,7 @@ $htmlcode = <<<ENDHTML
 <body>
     <form onsubmit="window.location.href='$proxy_prefix' + document.getElementById('site').value; return false;">
         <div class="form-title-row">
-            <h1>PROXY &middot; NRIRD &middot; XYZ</h1>
+            <h1>WEB PROXY</h1>
         </div>
         <div class="form-row">
             <label>
@@ -526,7 +526,7 @@ if (stripos($contentType, "text/html") !== false) {
 
   }
 
-  echo "<!-- Proxified page constructed by http://proxy.nrird.xyz -->\n" . $doc->saveHTML();
+  echo "<!-- Proxified page constructed by https://nrird.xyz/proxy -->\n" . $doc->saveHTML();
 } else if (stripos($contentType, "text/css") !== false) { //This is CSS, so proxify url() references.
   echo proxifyCSS($responseBody, $url);
 } else { //This isn't a web page or CSS, so serve unmodified through the proxy with the correct headers (images, JavaScript, etc.)
