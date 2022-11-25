@@ -1,10 +1,6 @@
 # web-proxy-script
 
-Minimalist, private web proxy script used at https://nrird.xyz/proxy
-
-## Screenshot
-
-![Screenshot](screenshot2.png)
+Minimalist, private web proxy script used at https://dev.nrird.com/web-proxy/
 
 ## License
 

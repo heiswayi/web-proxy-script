@@ -1,6 +1,6 @@
 <?php
 
-// Private web proxy script by Heiswayi Nrird (http://heiswayi.github.io)
+// Private web proxy script by Heiswayi Nrird (https://heiswayi.nrird.com)
 // Released under MIT license
 // Free Software should work like this: whatever you take for free, you must give back for free.
 
@@ -166,202 +166,29 @@ $proxy_prefix = PROXY_PREFIX;
 $htmlcode = <<<ENDHTML
 <!DOCTYPE html>
 <html>
-
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>WEB PROXY</title>
+    <meta charset="utf-8" />
+    <title>Upload</title>
     <style>
-        * {
-            padding: 0;
-            margin: 0
-        }
-
-        body {
-            background: #f3f3f3;
-            font: 400 16px sans-serif;
-            color: #555
-        }
-
-        nav {
-            max-width: 800px;
-            margin: 80px auto 60px;
-            text-align: center;
-            font-size: 18px;
-            color: silver
-        }
-
-        nav a {
-            display: inline-block;
-            margin: 0 14px;
-            text-decoration: none;
-            color: #6e6e6e;
-            font-weight: 700;
-            font-size: 16px
-        }
-
-        nav a.active {
-            color: #6CAEE0
-        }
-
+        *,::after,::before{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";font-size:1rem;font-weight:400;line-height:1.5;color:#212529;background-color:#fff;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent}[tabindex="-1"]:focus:not(:focus-visible){outline:0!important}hr{margin:1rem 0;color:inherit;background-color:currentColor;border:0;opacity:.25}hr:not([size]){height:1px}h1,h2,h3,h4,h5,h6{margin-top:0;margin-bottom:.5rem;font-weight:500;line-height:1.2}h1{font-size:2.5rem}h2{font-size:2rem}h3{font-size:1.75rem}h4{font-size:1.5rem}h5{font-size:1.25rem}h6{font-size:1rem}p{margin-top:0;margin-bottom:1rem}abbr[data-original-title],abbr[title]{text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted;cursor:help;-webkit-text-decoration-skip-ink:none;text-decoration-skip-ink:none}address{margin-bottom:1rem;font-style:normal;line-height:inherit}ol,ul{padding-left:2rem}dl,ol,ul{margin-top:0;margin-bottom:1rem}ol ol,ol ul,ul ol,ul ul{margin-bottom:0}dt{font-weight:700}dd{margin-bottom:.5rem;margin-left:0}blockquote{margin:0 0 1rem}b,strong{font-weight:bolder}small{font-size:.875em}sub,sup{position:relative;font-size:.75em;line-height:0;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}a{color:#0d6efd;text-decoration:none}a:hover{color:#024dbc;text-decoration:underline}a:not([href]),a:not([href]):hover{color:inherit;text-decoration:none}code,kbd,pre,samp{font-family:SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace;font-size:1em}pre{display:block;margin-top:0;margin-bottom:1rem;overflow:auto;font-size:.875em}pre code{font-size:inherit;color:inherit;word-break:normal}code{font-size:.875em;color:#d63384;word-wrap:break-word}a&gt;code{color:inherit}kbd{padding:.2rem .4rem;font-size:.875em;color:#fff;background-color:#212529;border-radius:.2rem}kbd kbd{padding:0;font-size:1em;font-weight:700}figure{margin:0 0 1rem}img{vertical-align:middle}svg{overflow:hidden;vertical-align:middle}table{border-collapse:collapse}caption{padding-top:.5rem;padding-bottom:.5rem;color:#6c757d;text-align:left;caption-side:bottom}th{text-align:inherit}label{display:inline-block;margin-bottom:.5rem}button{border-radius:0}button:focus{outline:1px dotted;outline:5px auto -webkit-focus-ring-color}button,input,optgroup,select,textarea{margin:0;font-family:inherit;font-size:inherit;line-height:inherit}button,input{overflow:visible}button,select{text-transform:none}select{word-wrap:normal}[list]::-webkit-calendar-picker-indicator{display:none}[type=button],[type=reset],[type=submit],button{-webkit-appearance:button}[type=button]:not(:disabled),[type=reset]:not(:disabled),[type=submit]:not(:disabled),button:not(:disabled){cursor:pointer}::-moz-focus-inner{padding:0;border-style:none}input[type=date],input[type=datetime-local],input[type=month],input[type=time]{-webkit-appearance:textfield}textarea{overflow:auto;resize:vertical}fieldset{min-width:0;padding:0;margin:0;border:0}legend{float:left;width:100%;padding:0;margin-bottom:.5rem;font-size:1.5rem;line-height:inherit;color:inherit;white-space:normal}mark{padding:.2em;background-color:#fcf8e3}progress{vertical-align:baseline}::-webkit-datetime-edit{overflow:visible;line-height:0}[type=search]{outline-offset:-2px;-webkit-appearance:textfield}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-color-swatch-wrapper{padding:0}::-webkit-file-upload-button{font:inherit;-webkit-appearance:button}output{display:inline-block}summary{display:list-item;cursor:pointer}template{display:none}main{display:block}[hidden]{display:none!important}
         form {
-            box-sizing: border-box;
-            width: 100%;
-            max-width: 500px;
-			min-width: 350px;
-            margin: 50px auto;
-            padding: 55px;
-            background-color: #fff;
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .1);
-            font: 400 14px sans-serif;
-            text-align: center
+            display: flex;
+            flex-direction: column;
+            gap: 1ch;
+            padding: 12px;
         }
-
-        form .form-row {
-            text-align: left;
-        }
-
-        form .form-title-row {
-            margin: 0 auto 40px auto;
-			text-align: left;
-        }
-
-        form h1 {
-            display: block;
-            box-sizing: border-box;
-            color: #4C565E;
-            font-size: 24px;
-            padding: 0 0 3px;
-            margin: 0;
-            border-bottom: 2px solid #6CAEE0
-        }
-
-        form .form-row>label span {
-            display: block;
-            box-sizing: border-box;
-            color: #5f5f5f;
-            padding: 0 0 10px;
-            font-weight: 700
-        }
-
-        form input {
-            color: #5f5f5f;
-            box-sizing: border-box;
-            box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, .08);
-            padding: 12px 18px;
-            border: 1px solid #dbdbdb;
-			margin-bottom: 10px;
-        }
-
-        form input[type=email],
-        form input[type=password],
-        form input[type=text],
-        form textarea {
-            width: 100%
-        }
-
-        form input[type=number] {
-            max-width: 100px
-        }
-
-        form input[type=checkbox],
-        form input[type=radio] {
-            box-shadow: none;
-            width: auto
-        }
-
-        form textarea {
-            color: #5f5f5f;
-            box-sizing: border-box;
-            box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, .08);
-            padding: 12px 18px;
-            border: 1px solid #dbdbdb;
-            resize: none;
-            min-height: 80px;
-        }
-
-        form select {
-            background-color: #fff;
-            color: #5f5f5f;
-            box-sizing: border-box;
-            width: 240px;
-            box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, .08);
-            padding: 12px 18px;
-            border: 1px solid #dbdbdb
-        }
-
-        form .form-radio-buttons>div {
-            margin-bottom: 10px
-        }
-
-        form .form-radio-buttons label span {
-            margin-left: 8px;
-            color: #5f5f5f
-        }
-
-        form .form-radio-buttons input {
-            width: auto
-        }
-
-        form button {
-            border-radius: 2px;
-            background-color: #6caee0;
-            color: #fff;
-            font-weight: 700;
-            box-shadow: 1px 2px 4px 0 rgba(0, 0, 0, .08);
-            padding: 14px 22px;
-            border: 0;
-			margin-top: 10px;
-			cursor: pointer;
-        }
-
-        p.explanation {
-            padding: 15px 20px;
-            line-height: 1.5;
-            background-color: #FFFFE0;
-            font-size: 13px;
-            text-align: center;
-            margin-top: 40px;
-            color: #6B6B48;
-            border-radius: 3px;
-            border-bottom: 2px solid #ECECD0;
-			border-right: 2px solid #ECECD0;
-            text-align: left
-        }
-
-        @media (max-width:600px) {
-            form {
-                padding: 30px
-            }
-			body {
-				background: #fff;
-			}
-			form {
-				box-shadow: none;
-			}
+        input[type="submit"] {
+            width: fit-content;
         }
     </style>
 </head>
-
 <body>
     <form onsubmit="window.location.href='$proxy_prefix' + document.getElementById('site').value; return false;">
-        <div class="form-title-row">
-            <h1>WEB PROXY</h1>
-        </div>
-        <div class="form-row">
-            <label>
-		<span>Enter full URL:</span>
-		<input type="text" id="site" placeholder="http://www.google.com" required>
-		</label>
-        </div>
-        <div class="form-row">
-            <button type="submit">Proxify</button>
-        </div>
-        <p class="explanation"><strong>DISCLAIMER:</strong><br/>Use this proxy at your own risk!</p>
+        <div>Enter the full URL to proxify:</div>
+        <input type="text" id="site" placeholder="http://www.google.com" required/>
+        <input type="submit" value="Proxify"/>
     </form>
 </body>
-
 </html>
 ENDHTML;
 
@@ -526,7 +353,7 @@ if (stripos($contentType, "text/html") !== false) {
 
   }
 
-  echo "<!-- Proxified page constructed by https://nrird.xyz/proxy -->\n" . $doc->saveHTML();
+  echo "<!-- Proxified page constructed by https://dev.nrird.com/web-proxy/ -->\n" . $doc->saveHTML();
 } else if (stripos($contentType, "text/css") !== false) { //This is CSS, so proxify url() references.
   echo proxifyCSS($responseBody, $url);
 } else { //This isn't a web page or CSS, so serve unmodified through the proxy with the correct headers (images, JavaScript, etc.)
