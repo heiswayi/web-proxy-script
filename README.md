@@ -1,7 +1,7 @@
 # web-proxy-script
 
-Minimalist, private web proxy script used at https://dev.nrird.com/web-proxy/
+A minimalist, private web proxy script using PHP used at [dev.nrird.com/web-proxy](https://dev.nrird.com/web-proxy).
 
 ## License
 
-MIT License
+[MIT](LICENSE)
